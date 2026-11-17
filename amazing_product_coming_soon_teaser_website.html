@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazing Product Coming Soon — You'll Revel in the Ability to Breathe Easy</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace']
+          },
+          colors: {
+            obsidian: {
+              950: '#06080C',
+              900: '#0A0E15',
+              850: '#0E131B',
+              800: '#141B26'
+            },
+            anodized: {
+              400: '#2DD4BF',
+              500: '#14B8A6',
+              600: '#0D9488',
+              sky: '#38BDF8'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Keyframes & Specular Lighting Polish -->
+  <style>
+    /* Subtle organic 4.8s breathing cadence for hero accent text */
+    @keyframes breatheCadence {
+      0%, 100% {
+        filter: drop-shadow(0 0 12px rgba(45, 212, 191, 0.22));
+        opacity: 0.94;
+      }
+      50% {
+        filter: drop-shadow(0 0 30px rgba(45, 212, 191, 0.62)) drop-shadow(0 0 56px rgba(56, 189, 248, 0.32));
+        opacity: 1;
+      }
+    }
+
+    .animate-breathe-glow {
+      animation: breatheCadence 4.8s ease-in-out infinite;
+    }
+
+    /* Gentle upward mist drift inside the rim-lit silhouette stage */
+    @keyframes laminarMistRise {
+      0% {
+        transform: translateY(10px) scaleY(0.95);
+        opacity: 0.32;
+      }
+      50% {
+        transform: translateY(-6px) scaleY(1.04);
+        opacity: 0.72;
+      }
+      100% {
+        transform: translateY(10px) scaleY(0.95);
+        opacity: 0.32;
+      }
+    }
+
+    .mist-plume-a {
+      animation: laminarMistRise 5.2s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    .mist-plume-b {
+      animation: laminarMistRise 6.4s ease-in-out infinite 1.2s;
+      transform-origin: center bottom;
+    }
+
+    /* Pulsing hotspot halo rings */
+    @keyframes hotspotPing {
+      0% {
+        transform: scale(1);
+        opacity: 0.75;
+      }
+      75%, 100% {
+        transform: scale(2.35);
+        opacity: 0;
+      }
+    }
+
+    .hotspot-ring {
+      animation: hotspotPing 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    /* Smooth scroll-reveal transition */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Magnetic ring hover/loop float */
+    @keyframes magneticSnap {
+      0%, 100% { transform: translateX(0px); }
+      45% { transform: translateX(6px); }
+      55% { transform: translateX(6px); }
+    }
+
+    .mag-left {
+      animation: magneticSnap 4.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    @keyframes magneticSnapRight {
+      0%, 100% { transform: translateX(0px); }
+      45% { transform: translateX(-6px); }
+      55% { transform: translateX(-6px); }
+    }
+
+    .mag-right {
+      animation: magneticSnapRight 4.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    /* Full-bleed responsive canvas */
+    #airflowCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-breathe-glow,
+      .mist-plume-a,
+      .mist-plume-b,
+      .hotspot-ring,
+      .mag-left,
+      .mag-right {
+        animation: none !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#F4F7FA] text-[#0B111E] dark:bg-[#06080C] dark:text-[#F1F5F9] font-sans antialiased selection:bg-teal-400/30 selection:text-teal-900 dark:selection:text-teal-100 transition-colors duration-500 overflow-x-hidden">
+
+  <!-- ===================================================================== -->
+  <!-- FLOATING TOAST NOTIFICATION (Replaces any browser alerts)             -->
+  <!-- ===================================================================== -->
+  <div id="toastNotification" role="status" aria-live="polite" class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300 max-w-sm">
+    <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-900/95 dark:bg-[#111926]/95 text-white border border-teal-400/30 shadow-2xl backdrop-blur-xl">
+      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-500/20 text-teal-300">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-7.25 7.25a1 1 0 01-1.415 0l-3.25-3.25a1 1 0 111.414-1.42l2.543 2.544 6.543-6.544a1 1 0 011.415 0z" clip-rule="evenodd" />
+        </svg>
+      </span>
+      <p id="toastMessage" class="text-xs sm:text-sm font-medium tracking-tight text-slate-100">Priority invite link copied to clipboard.</p>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 1. MINIMAL GLASSMORPHIC STICKY HEADER                                 -->
+  <!-- ===================================================================== -->
+  <header class="fixed top-0 inset-x-0 z-40 transition-colors duration-500 bg-white/70 dark:bg-[#06080C]/70 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+      
+      <!-- Brand Mark + Patent Pending Pill -->
+      <div class="flex items-center gap-3">
+        <a href="#top" aria-label="Home — Amazing Product Coming Soon" class="group flex items-center gap-2.5 focus:outline-none">
+          <!-- Abstract 360° Open Ring Icon with Rising Teal Air Stream -->
+          <div class="relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900/[0.05] dark:bg-white/[0.05] border border-slate-300/80 dark:border-white/10 group-hover:border-teal-500/50 transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <!-- Rising Laminar Stream -->
+              <path d="M16 21V6M12.5 18.5C12.5 14 13.5 11.5 13.5 8.5M19.5 18.5C19.5 14 18.5 11.5 18.5 8.5" stroke="url(#brandAirGrad)" stroke-width="1.6" stroke-linecap="round" />
+              <!-- 360° Open Ergonomic Ring -->
+              <path d="M9.2 13.2C6.9 14.9 5.5 17.2 5.5 19.7C5.5 24.1 10.2 27.5 16 27.5C21.8 27.5 26.5 24.1 26.5 19.7C26.5 17.2 25.1 14.9 22.8 13.2" stroke="currentColor" class="text-slate-800 dark:text-slate-200" stroke-width="2" stroke-linecap="round" />
+              <defs>
+                <linearGradient id="brandAirGrad" x1="16" y1="21" x2="16" y2="6" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.2" />
+                  <stop offset="60%" stop-color="#2DD4BF" />
+                  <stop offset="100%" stop-color="#38BDF8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="font-display font-semibold tracking-tight text-sm sm:text-base text-slate-900 dark:text-white hidden xs:inline sm:inline">
+            AERA<span class="text-teal-600 dark:text-teal-400 font-normal">°</span>
+          </span>
+        </a>
+
+        <!-- Patent Pending Pill Tag -->
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide uppercase bg-slate-900/[0.05] dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-slate-300/70 dark:border-white/10">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400"></span>
+          Patent Pending
+        </span>
+      </div>
+
+      <!-- Center Nav Links (Desktop) -->
+      <nav aria-label="Section navigation" class="hidden md:flex items-center gap-7 text-xs font-medium tracking-wide text-slate-600 dark:text-slate-400">
+        <a href="#silhouette" class="hover:text-slate-900 dark:hover:text-white transition-colors">The Silhouette</a>
+        <a href="#pillars" class="hover:text-slate-900 dark:hover:text-white transition-colors">Sensory Pillars</a>
+        <a href="#unveil" class="hover:text-slate-900 dark:hover:text-white transition-colors">Spring 2027 Unveil</a>
+      </nav>
+
+      <!-- Right Controls: Atmosphere Switcher + Smooth-Scroll CTA -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Theme Atmosphere Switcher -->
+        <button id="themeToggleBtn" type="button" aria-label="Switch visual atmosphere between Obsidian Night and Pure Mist" class="inline-flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium bg-slate-200/75 hover:bg-slate-200 dark:bg-white/[0.07] dark:hover:bg-white/[0.12] text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/10 transition-all cursor-pointer">
+          <!-- Moon Icon (shown in Obsidian Night) -->
+          <svg id="iconObsidian" class="w-3.5 h-3.5 text-teal-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+          </svg>
+          <!-- Mist Sun Icon (shown in Pure Mist) -->
+          <svg id="iconMist" class="w-3.5 h-3.5 text-teal-600 hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+          </svg>
+          <span id="themeLabel" class="hidden sm:inline">Obsidian Night</span>
+        </button>
+
+        <!-- Get Early Access Smooth-Scroll CTA -->
+        <a href="#heroWaitlistBox" class="inline-flex items-center justify-center px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-tight bg-slate-900 text-white hover:bg-slate-800 dark:bg-gradient-to-r dark:from-teal-400 dark:to-sky-400 dark:text-slate-950 dark:hover:brightness-110 shadow-sm shadow-teal-500/20 transition-all">
+          Get Early Access
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===================================================================== -->
+    <!-- 2. HERO SECTION WITH LIVE 60FPS LAMINAR AIRFLOW CANVAS                -->
+    <!-- ===================================================================== -->
+    <section class="relative min-h-screen flex flex-col justify-center pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden">
+      
+      <!-- Dynamic Ambient Aura Glow (reacts to Stealth / Cruise / Boost) -->
+      <div id="heroAmbientAura" aria-hidden="true" class="pointer-events-none absolute inset-0 transition-all duration-700">
+        <div id="auraOrbPrimary" class="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[85vw] max-w-4xl h-[420px] rounded-full bg-gradient-to-tr from-teal-500/15 via-cyan-400/10 to-sky-500/15 dark:from-teal-500/20 dark:via-teal-400/12 dark:to-sky-400/15 blur-3xl transition-all duration-700"></div>
+      </div>
+
+      <!-- Full-Bleed Interactive 60fps Laminar Airflow Canvas -->
+      <div class="absolute inset-0 z-0">
+        <canvas id="airflowCanvas" aria-hidden="true"></canvas>
+      </div>
+
+      <!-- Bottom Edge Soft Gradient Vignette -->
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#F4F7FA] dark:from-[#06080C] to-transparent z-0"></div>
+
+      <!-- Hero Content Container -->
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <!-- Prominent Glowing Pill Badge: AMAZING PRODUCT COMING SOON -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-white/85 dark:bg-[#0E1520]/85 border border-teal-500/35 dark:border-teal-400/35 shadow-[0_0_30px_rgba(20,184,166,0.18)] backdrop-blur-md mb-8">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-80"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-500 dark:bg-teal-400"></span>
+          </span>
+          <span class="text-[11px] sm:text-xs font-display font-bold uppercase tracking-[0.22em] bg-gradient-to-r from-teal-700 via-teal-600 to-sky-600 dark:from-teal-300 dark:via-cyan-200 dark:to-sky-300 bg-clip-text text-transparent">
+            Amazing Product Coming Soon
+          </span>
+        </div>
+
+        <!-- Sculptural Flagship Hero Headline -->
+        <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-[-0.035em] leading-[1.06] mb-6">
+          <span class="bg-gradient-to-b from-slate-950 via-slate-800 to-slate-600 dark:from-white dark:via-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
+            You'll Revel in the Ability to
+          </span>
+          <span class="block mt-1 sm:mt-2 bg-gradient-to-r from-teal-600 via-teal-500 to-sky-600 dark:from-[#2DD4BF] dark:via-[#5EEAD4] dark:to-[#38BDF8] bg-clip-text text-transparent animate-breathe-glow">
+            Breathe Easy.
+          </span>
+        </h1>
+
+        <!-- Supporting Hero Copy -->
+        <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-600 dark:text-slate-300/90 font-normal leading-relaxed tracking-tight mb-10">
+          No masks. No bulk. Just a whisper-quiet veil of pure, effortless air that moves with you—wherever life takes you.
+        </p>
+
+        <!-- Inline VIP Waitlist Capture Box -->
+        <div id="heroWaitlistBox" class="max-w-lg mx-auto scroll-mt-28">
+          <!-- Form State -->
+          <form id="heroWaitlistForm" novalidate class="relative p-1.5 sm:p-2 rounded-2xl sm:rounded-full bg-white/90 dark:bg-[#0C121C]/90 border border-slate-300/90 dark:border-white/[0.12] shadow-xl shadow-slate-900/[0.06] dark:shadow-black/50 backdrop-blur-xl transition-all focus-within:border-teal-500/60 dark:focus-within:border-teal-400/60">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <label for="heroEmailInput" class="sr-only">Email address for early access waitlist</label>
+              <input
+                id="heroEmailInput"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="Enter your email for Founding Insider access..."
+                class="w-full flex-1 bg-transparent px-4 py-3 sm:py-2.5 text-sm sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none rounded-xl sm:rounded-full"
+              />
+              <button
+                type="submit"
+                class="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3 rounded-xl sm:rounded-full font-display font-semibold text-sm bg-slate-900 text-white hover:bg-slate-800 dark:bg-gradient-to-r dark:from-[#2DD4BF] dark:to-[#38BDF8] dark:text-slate-950 dark:hover:brightness-110 shadow-md shadow-teal-500/20 transition-all cursor-pointer"
+              >
+                <span>Join the Waitlist</span>
+                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          <!-- Validation Feedback -->
+          <p id="heroEmailError" role="alert" class="hidden mt-2.5 text-xs font-medium text-rose-600 dark:text-rose-400">
+            Please enter a valid email address to reserve your priority unveil invitation.
+          </p>
+
+          <!-- Celebratory VIP Confirmation State (Hidden until submitted) -->
+          <div id="heroWaitlistSuccess" class="hidden p-5 sm:p-6 rounded-3xl bg-white/95 dark:bg-[#0D1420]/95 border border-teal-500/40 dark:border-teal-400/35 shadow-2xl shadow-teal-500/10 backdrop-blur-xl text-left">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="flex items-start gap-3.5">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-teal-500/15 text-teal-600 dark:text-teal-300 border border-teal-500/30">
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-7.25 7.25a1 1 0 01-1.415 0l-3.25-3.25a1 1 0 111.414-1.42l2.543 2.544 6.543-6.544a1 1 0 011.415 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded-md bg-teal-500/15 text-teal-700 dark:text-teal-300 font-semibold">
+                      Founding Insider <span class="insider-spot-number">#0428</span>
+                    </span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">Priority Reserved</span>
+                  </div>
+                  <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">
+                    You're on the private first-wave list.
+                  </p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                    Registered for <span class="confirmed-email-text font-medium text-slate-800 dark:text-slate-200">you@domain.com</span>
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                data-copy-invite
+                class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 dark:bg-white/10 dark:hover:bg-white/15 dark:text-teal-300 border border-transparent dark:border-teal-400/30 transition-all cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                  <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                </svg>
+                <span>Copy Invite Link</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="mt-3 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+            Private priority access before the Spring 2027 unveil. Zero spam, ever.
+          </p>
+        </div>
+
+        <!-- Interactive Breeze Preview Pill Selector (Stealth / Cruise / Boost) -->
+        <div class="mt-10 sm:mt-12 inline-flex flex-col items-center">
+          <div class="flex items-center gap-2 mb-2.5 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400"></span>
+            <span>Interactive Breeze Preview</span>
+            <span class="hidden sm:inline text-slate-400 dark:text-slate-600">•</span>
+            <span id="breezeStatusText" class="hidden sm:inline text-teal-700 dark:text-teal-300">Cruise Veil Active</span>
+          </div>
+
+          <div role="group" aria-label="Interactive Breeze Preview airflow modes" class="inline-flex items-center p-1 rounded-full bg-white/80 dark:bg-[#0B1018]/90 border border-slate-300/80 dark:border-white/[0.1] backdrop-blur-lg shadow-sm">
+            <button
+              type="button"
+              data-breeze-mode="stealth"
+              class="breeze-btn px-4 sm:px-5 py-2 rounded-full text-xs font-display font-semibold tracking-wide transition-all cursor-pointer text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            >
+              Stealth
+            </button>
+            <button
+              type="button"
+              data-breeze-mode="cruise"
+              class="breeze-btn px-4 sm:px-5 py-2 rounded-full text-xs font-display font-semibold tracking-wide transition-all cursor-pointer bg-slate-900 text-white dark:bg-teal-400/20 dark:text-teal-200 border border-transparent dark:border-teal-400/40 shadow-sm"
+            >
+              Cruise
+            </button>
+            <button
+              type="button"
+              data-breeze-mode="boost"
+              class="breeze-btn px-4 sm:px-5 py-2 rounded-full text-xs font-display font-semibold tracking-wide transition-all cursor-pointer text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            >
+              Boost
+            </button>
+          </div>
+          <p class="mt-2 text-[11px] text-slate-400 dark:text-slate-500">
+            Move cursor or touch across the veil to part the laminar air curtain
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 3. MYSTERIOUS RIM-LIT SILHOUETTE REVEAL                               -->
+    <!-- ===================================================================== -->
+    <section id="silhouette" class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Section Intro -->
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 reveal-on-scroll">
+          <span class="inline-block text-xs font-mono uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400 font-semibold mb-3">
+            First Glimpse • Form Factor Teaser
+          </span>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl tracking-[-0.03em] text-slate-900 dark:text-white mb-4">
+            A New Category of Wearable Freedom
+          </h2>
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            Industrial respirators sealed your face behind heavy rubber and plastic. We started from a blank sheet—sculpting an invisible, featherlight personal atmosphere that rests gracefully below your collarbone.
+          </p>
+        </div>
+
+        <!-- Interactive Dark-Studio Rim-Lit Stage + Hotspot Clue Panel -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch reveal-on-scroll">
+          
+          <!-- Left / Main: Dark-Studio 3D Parallax Rim-Lit Silhouette Stage -->
+          <div class="lg:col-span-8 flex">
+            <div
+              id="silhouetteStage"
+              style="perspective: 1100px;"
+              class="relative w-full rounded-3xl bg-[#05080E] border border-slate-300/60 dark:border-white/[0.1] shadow-2xl overflow-hidden p-5 sm:p-8 flex flex-col justify-between min-h-[370px] sm:min-h-[440px] select-none"
+            >
+              <!-- Top Studio Micro-Label -->
+              <div class="relative z-20 flex items-center justify-between text-[11px] font-mono tracking-wider uppercase text-slate-400">
+                <span class="inline-flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+                  Studio Silhouette • Rim-Light Preview
+                </span>
+                <span class="hidden sm:inline text-slate-500">Tap or Hover Nodes [01–03]</span>
+              </div>
+
+              <!-- 3D Tilt Wrapper -->
+              <div
+                id="silhouetteTiltCard"
+                class="relative z-10 my-auto py-4 transition-transform duration-200 ease-out will-change-transform"
+              >
+                <!-- Specular Dynamic Sheen Overlay -->
+                <div
+                  id="silhouetteDynamicGlow"
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-0 rounded-2xl opacity-60 transition-opacity duration-300"
+                  style="background: radial-gradient(380px circle at 50% 38%, rgba(45, 212, 191, 0.16), transparent 70%);"
+                ></div>
+
+                <!-- Enigmatic Rim-Lit Collar Crown SVG (Pure Silhouette, Zero Blueprint Spoilers) -->
+                <svg class="w-full h-auto max-h-[290px] sm:max-h-[330px] mx-auto overflow-visible" viewBox="0 0 800 380" fill="none" role="img" aria-label="Mysterious rim-lit silhouette of a sleek wearable collar projecting a soft upward teal air veil">
+                  <defs>
+                    <!-- Soft Teal Backlight Aura -->
+                    <radialGradient id="stageBacklight" cx="50%" cy="54%" r="48%">
+                      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.28" />
+                      <stop offset="48%" stop-color="#0EA5E9" stop-opacity="0.09" />
+                      <stop offset="100%" stop-color="#05080E" stop-opacity="0" />
+                    </radialGradient>
+
+                    <!-- Upward Laminar Mist Veil Gradient -->
+                    <linearGradient id="laminarVeilGrad" x1="400" y1="235" x2="400" y2="25" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.52" />
+                      <stop offset="45%" stop-color="#38BDF8" stop-opacity="0.18" />
+                      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0" />
+                    </linearGradient>
+
+                    <!-- Satin Titanium Rim-Light Edge -->
+                    <linearGradient id="titaniumRim" x1="150" y1="215" x2="650" y2="215" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#334155" stop-opacity="0.08" />
+                      <stop offset="22%" stop-color="#94A3B8" stop-opacity="0.85" />
+                      <stop offset="50%" stop-color="#F8FAFC" stop-opacity="0.98" />
+                      <stop offset="78%" stop-color="#94A3B8" stop-opacity="0.85" />
+                      <stop offset="100%" stop-color="#334155" stop-opacity="0.08" />
+                    </linearGradient>
+
+                    <!-- Luminous Teal Aperture Rim -->
+                    <linearGradient id="tealAperture" x1="250" y1="220" x2="550" y2="220" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.2" />
+                      <stop offset="30%" stop-color="#5EEAD4" stop-opacity="0.95" />
+                      <stop offset="50%" stop-color="#2DD4BF" stop-opacity="0.4" />
+                      <stop offset="70%" stop-color="#5EEAD4" stop-opacity="0.95" />
+                      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.2" />
+                    </linearGradient>
+
+                    <!-- Deep Obsidian Body Fade Into Shadow -->
+                    <linearGradient id="obsidianShadowBody" x1="400" y1="198" x2="400" y2="345" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#151E2C" />
+                      <stop offset="42%" stop-color="#090D15" />
+                      <stop offset="100%" stop-color="#05080E" stop-opacity="0" />
+                    </linearGradient>
+
+                    <filter id="mistBlur" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="14" />
+                    </filter>
+                  </defs>
+
+                  <!-- Studio Backlight Glow -->
+                  <ellipse cx="400" cy="210" rx="310" ry="135" fill="url(#stageBacklight)" />
+
+                  <!-- Rising Laminar Air Curtain Plumes (Left & Right Symmetrical Veil) -->
+                  <g class="mist-plume-a" filter="url(#mistBlur)">
+                    <path d="M250 226 C265 155, 315 88, 355 32 L445 32 C485 88, 535 155, 550 226 Z" fill="url(#laminarVeilGrad)" />
+                  </g>
+                  <g class="mist-plume-b">
+                    <!-- Delicate Crisp Laminar Stream Filaments -->
+                    <path d="M292 220 C304 168, 326 118, 344 62" stroke="url(#laminarVeilGrad)" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M332 226 C342 168, 358 112, 370 46" stroke="url(#laminarVeilGrad)" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M400 228 L400 38" stroke="url(#laminarVeilGrad)" stroke-width="1.4" stroke-dasharray="3 6" stroke-linecap="round" />
+                    <path d="M468 226 C458 168, 442 112, 430 46" stroke="url(#laminarVeilGrad)" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M508 220 C496 168, 474 118, 456 62" stroke="url(#laminarVeilGrad)" stroke-width="1.5" stroke-linecap="round" />
+                  </g>
+
+                  <!-- Enigmatic Rear/Inner Horizon Arc (Subtle 360° Depth Hint) -->
+                  <path d="M228 214 C278 182, 522 182, 572 214" stroke="#334155" stroke-opacity="0.45" stroke-width="1.2" stroke-linecap="round" />
+
+                  <!-- Main Sculpted Ergonomic Silhouette Emerging From Shadow -->
+                  <path
+                    d="M158 268 C176 218, 244 196, 324 214 C362 223, 438 223, 476 214 C556 196, 624 218, 642 268 L666 340 L134 340 Z"
+                    fill="url(#obsidianShadowBody)"
+                  />
+
+                  <!-- Sleek Satin Titanium Upper Chamfer Rim-Light -->
+                  <path
+                    d="M164 262 C184 215, 248 197, 326 215 C364 224, 436 224, 474 215 C552 197, 616 215, 636 262"
+                    stroke="url(#titaniumRim)"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                  />
+
+                  <!-- Dual Recessed Luminous Top Veil Arcs -->
+                  <path d="M244 212 C276 206, 314 212, 348 220" stroke="url(#tealAperture)" stroke-width="3" stroke-linecap="round" />
+                  <path d="M556 212 C524 206, 486 212, 452 220" stroke="url(#tealAperture)" stroke-width="3" stroke-linecap="round" />
+
+                  <!-- Subtle Secondary Specular Contour Line Fading Into Darkness -->
+                  <path
+                    d="M204 282 C252 246, 322 252, 400 256 C478 252, 548 246, 596 282"
+                    stroke="#64748B"
+                    stroke-opacity="0.24"
+                    stroke-width="1.1"
+                    stroke-linecap="round"
+                  />
+                </svg>
+
+                <!-- Interactive Glowing Hotspot Node 1: Zero-Mask Freedom -->
+                <button
+                  type="button"
+                  data-hotspot="0"
+                  aria-label="Inspect Zero-Mask Freedom clue"
+                  style="left: 50%; top: 24%;"
+                  class="hotspot-node group absolute -translate-x-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full focus:outline-none cursor-pointer"
+                >
+                  <span class="hotspot-ring absolute w-6 h-6 rounded-full bg-teal-400/50"></span>
+                  <span class="hotspot-core relative flex items-center justify-center w-6 h-6 rounded-full bg-teal-400 text-slate-950 text-[11px] font-mono font-bold shadow-[0_0_20px_rgba(45,212,191,0.9)] ring-2 ring-white/80 transition-transform group-hover:scale-110">
+                    1
+                  </span>
+                </button>
+
+                <!-- Interactive Glowing Hotspot Node 2: Whisper-Quiet Veil -->
+                <button
+                  type="button"
+                  data-hotspot="1"
+                  aria-label="Inspect Whisper-Quiet Veil clue"
+                  style="left: 34%; top: 56%;"
+                  class="hotspot-node group absolute -translate-x-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full focus:outline-none cursor-pointer"
+                >
+                  <span class="hotspot-ring absolute w-6 h-6 rounded-full bg-teal-400/40"></span>
+                  <span class="hotspot-core relative flex items-center justify-center w-6 h-6 rounded-full bg-slate-900/90 text-teal-300 border border-teal-400/60 text-[11px] font-mono font-bold shadow-[0_0_15px_rgba(45,212,191,0.45)] transition-transform group-hover:scale-110">
+                    2
+                  </span>
+                </button>
+
+                <!-- Interactive Glowing Hotspot Node 3: Invisible Architecture -->
+                <button
+                  type="button"
+                  data-hotspot="2"
+                  aria-label="Inspect Invisible Architecture clue"
+                  style="left: 69%; top: 66%;"
+                  class="hotspot-node group absolute -translate-x-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full focus:outline-none cursor-pointer"
+                >
+                  <span class="hotspot-ring absolute w-6 h-6 rounded-full bg-teal-400/40"></span>
+                  <span class="hotspot-core relative flex items-center justify-center w-6 h-6 rounded-full bg-slate-900/90 text-teal-300 border border-teal-400/60 text-[11px] font-mono font-bold shadow-[0_0_15px_rgba(45,212,191,0.45)] transition-transform group-hover:scale-110">
+                    3
+                  </span>
+                </button>
+              </div>
+
+              <!-- Live Overlay Caption Inside Stage Bottom -->
+              <div class="relative z-20 pt-3 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span id="stageClueBadge" class="text-[11px] font-mono uppercase tracking-widest text-teal-300">
+                    01 • Zero-Mask Freedom
+                  </span>
+                  <p id="stageClueText" class="text-xs sm:text-sm text-slate-200 mt-0.5">
+                    Breathe naturally with nothing covering your face, nose, or smile.
+                  </p>
+                </div>
+                <span class="text-[11px] font-mono text-slate-500 shrink-0">3D Interactive Tilt</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Synchronized Interactive Clue Cards -->
+          <div class="lg:col-span-4 flex flex-col justify-between gap-4">
+            
+            <!-- Clue Card 1 -->
+            <button
+              type="button"
+              data-clue-card="0"
+              class="clue-card text-left p-5 sm:p-6 rounded-3xl transition-all duration-300 cursor-pointer border bg-white dark:bg-[#0D1420] border-teal-500/60 dark:border-teal-400/50 shadow-lg shadow-teal-500/10"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-teal-600 dark:text-teal-400 font-semibold">
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-teal-500/15 text-[11px]">01</span>
+                  Hotspot Clue
+                </span>
+                <span class="clue-indicator w-2 h-2 rounded-full bg-teal-400"></span>
+              </div>
+              <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-1.5">
+                Zero-Mask Freedom
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Breathe naturally with nothing covering your face, nose, or smile.
+              </p>
+            </button>
+
+            <!-- Clue Card 2 -->
+            <button
+              type="button"
+              data-clue-card="1"
+              class="clue-card text-left p-5 sm:p-6 rounded-3xl transition-all duration-300 cursor-pointer border bg-white/70 dark:bg-[#0B1018]/75 border-slate-200/90 dark:border-white/[0.08] hover:border-teal-500/40"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/15 text-[11px]">02</span>
+                  Hotspot Clue
+                </span>
+                <span class="clue-indicator w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+              </div>
+              <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-1.5">
+                Whisper-Quiet Veil
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Precision acoustic diffusion delivers crisp, purified air in near silence.
+              </p>
+            </button>
+
+            <!-- Clue Card 3 -->
+            <button
+              type="button"
+              data-clue-card="2"
+              class="clue-card text-left p-5 sm:p-6 rounded-3xl transition-all duration-300 cursor-pointer border bg-white/70 dark:bg-[#0B1018]/75 border-slate-200/90 dark:border-white/[0.08] hover:border-teal-500/40"
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/15 text-[11px]">03</span>
+                  Hotspot Clue
+                </span>
+                <span class="clue-indicator w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+              </div>
+              <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-1.5">
+                Invisible Architecture
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Sculpted like modern audio gear. Conceals effortlessly beneath everyday clothing.
+              </p>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 4. BENTO-GRID SENSORY PILLARS (3-Card Glassmorphic Bento Layout)      -->
+    <!-- ===================================================================== -->
+    <section id="pillars" class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 reveal-on-scroll">
+          <div class="max-w-2xl">
+            <span class="inline-block text-xs font-mono uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400 font-semibold mb-3">
+              Sensory Architecture
+            </span>
+            <h2 class="font-display font-bold text-3xl sm:text-5xl tracking-[-0.03em] text-slate-900 dark:text-white">
+              Crafted for the Air You Live In.
+            </h2>
+          </div>
+          <p class="max-w-md text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            Every surface, curve, and airflow channel is obsessed over so you forget the technology is even there.
+          </p>
+        </div>
+
+        <!-- 3-Card Modern Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          
+          <!-- BENTO CARD 1: Pure Air, Unbound (Featured 5-Col Card with Animated AQI Meter) -->
+          <article id="aqiBentoCard" class="md:col-span-2 lg:col-span-5 group rounded-3xl p-6 sm:p-8 bg-white/85 dark:bg-[#0B1019]/90 border border-slate-200/90 dark:border-white/[0.09] shadow-xl shadow-slate-900/[0.04] dark:shadow-none backdrop-blur-xl flex flex-col justify-between reveal-on-scroll">
+            
+            <!-- Animated AQI Purity Meter Widget -->
+            <div class="rounded-2xl p-5 bg-slate-950 text-white border border-white/[0.08] mb-7 relative overflow-hidden">
+              <div aria-hidden="true" class="pointer-events-none absolute -right-10 -top-10 w-36 h-36 rounded-full bg-teal-500/20 blur-2xl"></div>
+              
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[11px] font-mono uppercase tracking-widest text-slate-400">
+                  Breathing Zone Purity
+                </span>
+                <button
+                  id="replayAqiBtn"
+                  type="button"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono bg-white/[0.07] hover:bg-white/[0.14] text-teal-300 border border-white/10 transition-colors cursor-pointer"
+                >
+                  <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clip-rule="evenodd" />
+                  </svg>
+                  <span>Test Plume</span>
+                </button>
+              </div>
+
+              <div class="flex items-baseline justify-between gap-4">
+                <div class="flex items-baseline gap-2.5">
+                  <span id="aqiNumberDisplay" class="font-mono font-bold text-4xl sm:text-5xl tracking-tight text-teal-300 transition-colors duration-300">
+                    165
+                  </span>
+                  <span id="aqiStatusPill" class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30 transition-all duration-300">
+                    Smoke Plume
+                  </span>
+                </div>
+                <span class="text-xs font-mono text-slate-400">AQI Index</span>
+              </div>
+
+              <!-- Progress Bar Track -->
+              <div class="mt-4 h-2 w-full rounded-full bg-white/10 overflow-hidden">
+                <div id="aqiMeterBar" class="h-full rounded-full bg-gradient-to-r from-teal-400 via-cyan-400 to-amber-400 transition-all duration-150" style="width: 86%;"></div>
+              </div>
+
+              <div class="mt-2.5 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span>002 Pure Veil</span>
+                <span>165+ Ambient Haze</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-display font-bold text-2xl tracking-tight text-slate-900 dark:text-white mb-2.5">
+                Pure Air, Unbound
+              </h3>
+              <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                Wildfire smoke, dense urban commutes, dusty creative studios, and crowded terminals—handled effortlessly in real time without industrial bulk or sealed facepieces.
+              </p>
+            </div>
+          </article>
+
+          <!-- BENTO CARD 2: Magnetic Intuition (3.5/4-Col Card) -->
+          <article class="md:col-span-1 lg:col-span-4 group rounded-3xl p-6 sm:p-8 bg-white/85 dark:bg-[#0B1019]/90 border border-slate-200/90 dark:border-white/[0.09] shadow-xl shadow-slate-900/[0.04] dark:shadow-none backdrop-blur-xl flex flex-col justify-between reveal-on-scroll">
+            
+            <!-- Self-Aligning Magnetic Ring Graphic -->
+            <div class="h-44 rounded-2xl bg-slate-100/90 dark:bg-[#070B11] border border-slate-200/80 dark:border-white/[0.06] mb-7 flex flex-col items-center justify-center relative overflow-hidden p-4">
+              <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.14),transparent_65%)]"></div>
+              <svg class="w-44 h-28" viewBox="0 0 200 120" fill="none" aria-hidden="true">
+                <!-- Left Satin Ring -->
+                <g class="mag-left">
+                  <circle cx="86" cy="60" r="28" stroke="#64748B" stroke-width="2.5" stroke-opacity="0.7" />
+                  <circle cx="86" cy="60" r="20" stroke="#2DD4BF" stroke-width="1.8" stroke-dasharray="5 4" />
+                </g>
+                <!-- Right Anodized Ring -->
+                <g class="mag-right">
+                  <circle cx="114" cy="60" r="28" stroke="#38BDF8" stroke-width="2.5" stroke-opacity="0.75" />
+                  <circle cx="114" cy="60" r="20" stroke="#2DD4BF" stroke-width="1.8" />
+                </g>
+                <!-- Center Lock Spark -->
+                <circle cx="100" cy="60" r="4" fill="#2DD4BF" />
+              </svg>
+              <span class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                Blind Snap-and-Go Alignment
+              </span>
+            </div>
+
+            <div>
+              <h3 class="font-display font-bold text-2xl tracking-tight text-slate-900 dark:text-white mb-2.5">
+                Magnetic Intuition
+              </h3>
+              <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                Snap-and-go simplicity meets open-loop washability. Self-aligning magnetic connections click softly into place by feel alone and rinse clean in seconds.
+              </p>
+            </div>
+          </article>
+
+          <!-- BENTO CARD 3: Engineered to Disappear (3-Col Card) -->
+          <article class="md:col-span-1 lg:col-span-3 group rounded-3xl p-6 sm:p-8 bg-white/85 dark:bg-[#0B1019]/90 border border-slate-200/90 dark:border-white/[0.09] shadow-xl shadow-slate-900/[0.04] dark:shadow-none backdrop-blur-xl flex flex-col justify-between reveal-on-scroll">
+            
+            <!-- Flagship Material & Active Cooling Visual -->
+            <div class="h-44 rounded-2xl bg-slate-100/90 dark:bg-[#070B11] border border-slate-200/80 dark:border-white/[0.06] mb-7 p-4 flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                  Finish Palette
+                </span>
+                <span class="text-[10px] font-mono text-teal-600 dark:text-teal-400">Active Cool</span>
+              </div>
+
+              <!-- Tactile Material Swatches -->
+              <div class="flex items-center justify-center gap-3 my-auto">
+                <!-- Obsidian Matte -->
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-slate-700 to-slate-950 border border-white/20 shadow-md" title="Obsidian Matte"></div>
+                <!-- Satin Titanium -->
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-slate-100 via-slate-300 to-slate-500 border border-white/50 shadow-md -ml-3" title="Satin Titanium"></div>
+                <!-- Anodized Teal -->
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-teal-300 via-teal-500 to-sky-500 border border-teal-200/60 shadow-md shadow-teal-500/30 -ml-3" title="Anodized Teal"></div>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                <span>Featherlight</span>
+                <span>4-Way Knit</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-display font-bold text-2xl tracking-tight text-slate-900 dark:text-white mb-2.5">
+                Engineered to Disappear
+              </h3>
+              <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+                Featherlight anatomical balance, gentle evaporative cooling comfort, and tactile consumer-tech textiles crafted for all-day wear.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. LIVE LAUNCH COUNTDOWN & FINAL WAITLIST SECTION                     -->
+    <!-- ===================================================================== -->
+    <section id="unveil" class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+      <div class="max-w-5xl mx-auto">
+        <div class="relative rounded-[2rem] p-8 sm:p-12 lg:p-16 bg-white/90 dark:bg-gradient-to-b dark:from-[#0D1420] dark:to-[#080C14] border border-slate-200/90 dark:border-white/[0.1] shadow-2xl shadow-slate-900/[0.06] dark:shadow-black/60 backdrop-blur-xl overflow-hidden text-center reveal-on-scroll">
+          
+          <!-- Ambient Corner Specular Glow -->
+          <div aria-hidden="true" class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[240px] rounded-full bg-gradient-to-r from-teal-500/20 via-cyan-400/15 to-sky-500/20 blur-3xl"></div>
+
+          <div class="relative z-10">
+            <!-- Unveil Pill -->
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/25 mb-6">
+              <span class="w-1.5 h-1.5 rounded-full bg-teal-500 dark:bg-teal-400"></span>
+              Spring 2027 Global Unveil • May 1, 2027
+            </span>
+
+            <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-[-0.03em] text-slate-900 dark:text-white mb-4">
+              Be First When the Veil Rises.
+            </h2>
+            <p class="max-w-xl mx-auto text-sm sm:text-lg text-slate-600 dark:text-slate-400 mb-10">
+              Early waitlist members receive private keynote access and priority Batch 01 allocation before public release.
+            </p>
+
+            <!-- Live Countdown Timer Grid (Days, Hours, Minutes, Seconds) -->
+            <div aria-label="Countdown to May 1, 2027 Global Unveil" class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 max-w-2xl mx-auto mb-12">
+              <div class="p-4 sm:p-6 rounded-2xl bg-slate-100/85 dark:bg-[#060A10]/90 border border-slate-200/90 dark:border-white/[0.08]">
+                <div id="cdDays" class="font-mono font-bold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
+                  165
+                </div>
+                <div class="mt-1.5 text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Days
+                </div>
+              </div>
+
+              <div class="p-4 sm:p-6 rounded-2xl bg-slate-100/85 dark:bg-[#060A10]/90 border border-slate-200/90 dark:border-white/[0.08]">
+                <div id="cdHours" class="font-mono font-bold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
+                  12
+                </div>
+                <div class="mt-1.5 text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Hours
+                </div>
+              </div>
+
+              <div class="p-4 sm:p-6 rounded-2xl bg-slate-100/85 dark:bg-[#060A10]/90 border border-slate-200/90 dark:border-white/[0.08]">
+                <div id="cdMinutes" class="font-mono font-bold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
+                  48
+                </div>
+                <div class="mt-1.5 text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Minutes
+                </div>
+              </div>
+
+              <div class="p-4 sm:p-6 rounded-2xl bg-slate-100/85 dark:bg-[#060A10]/90 border border-slate-200/90 dark:border-white/[0.08]">
+                <div id="cdSeconds" class="font-mono font-bold text-3xl sm:text-5xl text-teal-600 dark:text-teal-400 tracking-tight">
+                  00
+                </div>
+                <div class="mt-1.5 text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                  Seconds
+                </div>
+              </div>
+            </div>
+
+            <!-- Secondary Bottom Email Waitlist Capture -->
+            <div class="max-w-lg mx-auto">
+              <form id="footerWaitlistForm" novalidate class="p-1.5 sm:p-2 rounded-2xl sm:rounded-full bg-slate-100 dark:bg-[#060A10] border border-slate-300/90 dark:border-white/[0.12] focus-within:border-teal-500/60 transition-all">
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <label for="footerEmailInput" class="sr-only">Email address for early access</label>
+                  <input
+                    id="footerEmailInput"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    placeholder="Enter your email to lock in early access..."
+                    class="w-full flex-1 bg-transparent px-4 py-3 sm:py-2.5 text-sm sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none rounded-xl sm:rounded-full"
+                  />
+                  <button
+                    type="submit"
+                    class="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl sm:rounded-full font-display font-semibold text-sm bg-slate-900 text-white hover:bg-slate-800 dark:bg-gradient-to-r dark:from-[#2DD4BF] dark:to-[#38BDF8] dark:text-slate-950 dark:hover:brightness-110 transition-all cursor-pointer"
+                  >
+                    <span>Join the Waitlist</span>
+                  </button>
+                </div>
+              </form>
+
+              <p id="footerEmailError" role="alert" class="hidden mt-2.5 text-xs font-medium text-rose-600 dark:text-rose-400">
+                Please enter a valid email address to reserve your spot.
+              </p>
+
+              <!-- Secondary Confirmation State -->
+              <div id="footerWaitlistSuccess" class="hidden p-5 rounded-2xl bg-slate-100/95 dark:bg-[#060A10]/95 border border-teal-500/40 text-left">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <span class="text-xs font-mono uppercase tracking-wider text-teal-600 dark:text-teal-400 font-semibold">
+                      Founding Insider <span class="insider-spot-number">#0428</span> Confirmed
+                    </span>
+                    <p class="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">
+                      You'll Revel in the Ability to Breathe Easy. We'll notify <span class="confirmed-email-text text-teal-600 dark:text-teal-300">you@domain.com</span> first.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    data-copy-invite
+                    class="shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-white dark:bg-teal-400/15 dark:text-teal-300 border border-transparent dark:border-teal-400/30 hover:brightness-110 transition-all cursor-pointer"
+                  >
+                    Copy Invite Link
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MINIMALIST FOOTER                                                     -->
+  <!-- ===================================================================== -->
+  <footer class="border-t border-slate-200/80 dark:border-white/[0.08] py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2.5 font-medium text-slate-700 dark:text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-teal-500 dark:bg-teal-400"></span>
+        <span>Amazing Product Coming Soon • Patent Pending</span>
+      </div>
+      <div class="text-center sm:text-right">
+        © 2026–2027 Next-Gen Personal Air Architecture. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- INTERACTIVE APPLICATION LOGIC                                         -->
+  <!-- ===================================================================== -->
+  <script>
+    window.onload = function () {
+      // -------------------------------------------------------------------
+      // 1. THEME ATMOSPHERE SWITCHER ("Obsidian Night" vs "Pure Mist")
+      // -------------------------------------------------------------------
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeLabel = document.getElementById('themeLabel');
+      const iconObsidian = document.getElementById('iconObsidian');
+      const iconMist = document.getElementById('iconMist');
+      let isDarkTheme = true;
+
+      function updateThemeUI() {
+        if (isDarkTheme) {
+          htmlEl.classList.add('dark');
+          themeLabel.textContent = 'Obsidian Night';
+          iconObsidian.classList.remove('hidden');
+          iconMist.classList.add('hidden');
+        } else {
+          htmlEl.classList.remove('dark');
+          themeLabel.textContent = 'Pure Mist';
+          iconObsidian.classList.add('hidden');
+          iconMist.classList.remove('hidden');
+        }
+      }
+
+      themeToggleBtn.addEventListener('click', function () {
+        isDarkTheme = !isDarkTheme;
+        updateThemeUI();
+      });
+
+      // -------------------------------------------------------------------
+      // 2. TOAST NOTIFICATION & SAFE IFRAME CLIPBOARD HELPER
+      // -------------------------------------------------------------------
+      const toastEl = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      let toastTimer = null;
+
+      function showToast(message) {
+        toastMsg.textContent = message;
+        toastEl.classList.remove('opacity-0', 'translate-y-4');
+        toastEl.classList.add('opacity-100', 'translate-y-0');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('opacity-100', 'translate-y-0');
+          toastEl.classList.add('opacity-0', 'translate-y-4');
+        }, 3200);
+      }
+
+      function copyTextSafe(text) {
+        const tempArea = document.createElement('textarea');
+        tempArea.value = text;
+        tempArea.setAttribute('readonly', '');
+        tempArea.style.position = 'fixed';
+        tempArea.style.top = '-9999px';
+        tempArea.style.opacity = '0';
+        document.body.appendChild(tempArea);
+        tempArea.select();
+        let copied = false;
+        try {
+          copied = document.execCommand('copy');
+        } catch (err) {
+          copied = false;
+        }
+        document.body.removeChild(tempArea);
+        return copied;
+      }
+
+      // -------------------------------------------------------------------
+      // 3. 60FPS INTERACTIVE LAMINAR AIRFLOW CANVAS + BREEZE SELECTOR
+      // -------------------------------------------------------------------
+      const canvas = document.getElementById('airflowCanvas');
+      const ctx = canvas.getContext('2d');
+      const breezeBtns = document.querySelectorAll('[data-breeze-mode]');
+      const breezeStatusText = document.getElementById('breezeStatusText');
+      const auraOrbPrimary = document.getElementById('auraOrbPrimary');
+
+      const BREEZE_PRESETS = {
+        stealth: {
+          speed: 0.68,
+          densityRatio: 0.52,
+          streakLen: 12,
+          alpha: 0.48,
+          streamlineAlpha: 0.055,
+          label: 'Stealth Veil • Whisper Quiet',
+          auraScale: 'scale(0.88)',
+          auraOpacity: '0.65'
+        },
+        cruise: {
+          speed: 1.25,
+          densityRatio: 0.80,
+          streakLen: 22,
+          alpha: 0.76,
+          streamlineAlpha: 0.095,
+          label: 'Cruise Veil Active',
+          auraScale: 'scale(1)',
+          auraOpacity: '1'
+        },
+        boost: {
+          speed: 2.35,
+          densityRatio: 1.0,
+          streakLen: 38,
+          alpha: 0.98,
+          streamlineAlpha: 0.15,
+          label: 'Boost Shield • Peak Flow',
+          auraScale: 'scale(1.16)',
+          auraOpacity: '1'
+        }
+      };
+
+      let targetBreeze = BREEZE_PRESETS.cruise;
+      const liveBreeze = {
+        speed: BREEZE_PRESETS.cruise.speed,
+        densityRatio: BREEZE_PRESETS.cruise.densityRatio,
+        streakLen: BREEZE_PRESETS.cruise.streakLen,
+        alpha: BREEZE_PRESETS.cruise.alpha,
+        streamlineAlpha: BREEZE_PRESETS.cruise.streamlineAlpha
+      };
+
+      breezeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const mode = btn.getAttribute('data-breeze-mode');
+          if (!BREEZE_PRESETS[mode]) return;
+          targetBreeze = BREEZE_PRESETS[mode];
+          breezeStatusText.textContent = targetBreeze.label;
+          auraOrbPrimary.style.transform = 'translate(-50%, -50%) ' + targetBreeze.auraScale;
+          auraOrbPrimary.style.opacity = targetBreeze.auraOpacity;
+
+          breezeBtns.forEach(function (b) {
+            const isSelected = b === btn;
+            b.className = isSelected
+              ? 'breeze-btn px-4 sm:px-5 py-2 rounded-full text-xs font-display font-semibold tracking-wide transition-all cursor-pointer bg-slate-900 text-white dark:bg-teal-400/20 dark:text-teal-200 border border-transparent dark:border-teal-400/40 shadow-sm'
+              : 'breeze-btn px-4 sm:px-5 py-2 rounded-full text-xs font-display font-semibold tracking-wide transition-all cursor-pointer text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+          });
+        });
+      });
+
+      let cw = 0;
+      let ch = 0;
+      let particles = [];
+      const MAX_PARTICLES = 135;
+
+      // Pointer state for smooth laminar parting around cursor / touch
+      const pointer = {
+        x: -9999,
+        y: -9999,
+        smoothX: -9999,
+        smoothY: -9999,
+        active: false
+      };
+
+      function createParticle(randomY) {
+        const isTeal = Math.random() > 0.28;
+        return {
+          baseX: Math.random() * cw,
+          x: 0,
+          y: randomY ? Math.random() * ch : ch + Math.random() * 60,
+          radius: 0.8 + Math.random() * 1.7,
+          speedFactor: 0.72 + Math.random() * 0.65,
+          phase: Math.random() * Math.PI * 2,
+          swayAmp: 6 + Math.random() * 14,
+          isTeal: isTeal,
+          rank: Math.random()
+        };
+      }
+
+      function resizeCanvas() {
+        const parent = canvas.parentElement;
+        if (!parent) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        cw = parent.clientWidth;
+        ch = parent.clientHeight;
+        canvas.width = Math.floor(cw * dpr);
+        canvas.height = Math.floor(ch * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        if (particles.length === 0) {
+          for (let i = 0; i < MAX_PARTICLES; i++) {
+            const p = createParticle(true);
+            p.x = p.baseX;
+            particles.push(p);
+          }
+        } else {
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].baseX = (i / particles.length) * cw + (Math.random() - 0.5) * 35;
+          }
+        }
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Track mouse and touch across the Hero section
+      const heroSection = canvas.closest('section');
+      heroSection.addEventListener('mousemove', function (e) {
+        const rect = canvas.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+        if (!pointer.active) {
+          pointer.smoothX = pointer.x;
+          pointer.smoothY = pointer.y;
+        }
+        pointer.active = true;
+      });
+
+      heroSection.addEventListener('mouseleave', function () {
+        pointer.active = false;
+      });
+
+      heroSection.addEventListener('touchstart', function (e) {
+        if (e.touches.length > 0) {
+          const rect = canvas.getBoundingClientRect();
+          pointer.x = e.touches[0].clientX - rect.left;
+          pointer.y = e.touches[0].clientY - rect.top;
+          pointer.smoothX = pointer.x;
+          pointer.smoothY = pointer.y;
+          pointer.active = true;
+        }
+      }, { passive: true });
+
+      heroSection.addEventListener('touchmove', function (e) {
+        if (e.touches.length > 0) {
+          const rect = canvas.getBoundingClientRect();
+          pointer.x = e.touches[0].clientX - rect.left;
+          pointer.y = e.touches[0].clientY - rect.top;
+          pointer.active = true;
+        }
+      }, { passive: true });
+
+      heroSection.addEventListener('touchend', function () {
+        pointer.active = false;
+      }, { passive: true });
+
+      let frameTime = 0;
+
+      function renderLaminarCanvas() {
+        frameTime += 0.016;
+
+        // Smoothly interpolate Breeze parameters
+        liveBreeze.speed += (targetBreeze.speed - liveBreeze.speed) * 0.06;
+        liveBreeze.densityRatio += (targetBreeze.densityRatio - liveBreeze.densityRatio) * 0.06;
+        liveBreeze.streakLen += (targetBreeze.streakLen - liveBreeze.streakLen) * 0.06;
+        liveBreeze.alpha += (targetBreeze.alpha - liveBreeze.alpha) * 0.06;
+        liveBreeze.streamlineAlpha += (targetBreeze.streamlineAlpha - liveBreeze.streamlineAlpha) * 0.06;
+
+        if (pointer.active) {
+          pointer.smoothX += (pointer.x - pointer.smoothX) * 0.14;
+          pointer.smoothY += (pointer.y - pointer.smoothY) * 0.14;
+        }
+
+        ctx.clearRect(0, 0, cw, ch);
+
+        const repelRadius = Math.min(cw, 900) * 0.19 + 65;
+
+        // A. Draw subtle vertical laminar silk streamlines
+        const lineCount = cw < 640 ? 9 : 17;
+        const spacing = cw / (lineCount + 1);
+        ctx.lineWidth = 1;
+
+        for (let i = 1; i <= lineCount; i++) {
+          const anchorX = spacing * i;
+          ctx.beginPath();
+          for (let y = ch; y >= 0; y -= 26) {
+            let x = anchorX + Math.sin(y * 0.006 - frameTime * liveBreeze.speed * 1.4 + i) * 8;
+            if (pointer.active) {
+              const dx = x - pointer.smoothX;
+              const dy = y - pointer.smoothY;
+              const distSq = dx * dx + dy * dy;
+              const rSq = repelRadius * repelRadius;
+              if (distSq < rSq && distSq > 1) {
+                const dist = Math.sqrt(distSq);
+                const push = Math.pow(1 - dist / repelRadius, 2) * 52;
+                x += (dx / dist) * push;
+              }
+            }
+            if (y === ch) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+          ctx.strokeStyle = isDarkTheme
+            ? 'rgba(45, 212, 191, ' + liveBreeze.streamlineAlpha.toFixed(3) + ')'
+            : 'rgba(13, 148, 136, ' + (liveBreeze.streamlineAlpha * 0.85).toFixed(3) + ')';
+          ctx.stroke();
+        }
+
+        // B. Update and draw glowing laminar rising micro-particles
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (p.rank > liveBreeze.densityRatio) continue;
+
+          // Rise smoothly upward
+          p.y -= liveBreeze.speed * p.speedFactor * 1.45;
+          if (p.y < -40) {
+            p.y = ch + 20 + Math.random() * 30;
+            p.baseX = Math.random() * cw;
+          }
+
+          // Natural laminar wave sway
+          let targetX = p.baseX + Math.sin(p.y * 0.008 + p.phase) * p.swayAmp;
+
+          // Organic parting around cursor / touch
+          if (pointer.active) {
+            const dx = targetX - pointer.smoothX;
+            const dy = p.y - pointer.smoothY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < repelRadius && dist > 0.5) {
+              const force = Math.pow(1 - dist / repelRadius, 1.85) * 68;
+              targetX += (dx / dist) * force;
+            }
+          }
+
+          p.x += (targetX - p.x) * 0.16;
+
+          // Vertical fade near top & bottom edges
+          const edgeFade = Math.min(1, Math.min(p.y / 120, (ch - p.y) / 110));
+          const finalAlpha = Math.max(0, edgeFade * liveBreeze.alpha);
+          if (finalAlpha <= 0.02) continue;
+
+          const tailLen = liveBreeze.streakLen * p.speedFactor;
+          const grad = ctx.createLinearGradient(p.x, p.y, p.x, p.y + tailLen);
+
+          if (p.isTeal) {
+            const rgb = isDarkTheme ? '45, 212, 191' : '13, 148, 136';
+            grad.addColorStop(0, 'rgba(' + rgb + ', ' + finalAlpha.toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(' + rgb + ', 0)');
+          } else {
+            const rgb = isDarkTheme ? '186, 230, 253' : '2, 132, 199';
+            grad.addColorStop(0, 'rgba(' + rgb + ', ' + (finalAlpha * 0.8).toFixed(3) + ')');
+            grad.addColorStop(1, 'rgba(' + rgb + ', 0)');
+          }
+
+          ctx.beginPath();
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = p.radius * 1.35;
+          ctx.lineCap = 'round';
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x, p.y + tailLen);
+          ctx.stroke();
+
+          // Crisp leading luminous tip
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.isTeal
+            ? (isDarkTheme ? 'rgba(94, 234, 212, ' + finalAlpha.toFixed(3) + ')' : 'rgba(13, 148, 136, ' + finalAlpha.toFixed(3) + ')')
+            : (isDarkTheme ? 'rgba(241, 245, 249, ' + finalAlpha.toFixed(3) + ')' : 'rgba(14, 165, 233, ' + finalAlpha.toFixed(3) + ')');
+          ctx.fill();
+        }
+
+        requestAnimationFrame(renderLaminarCanvas);
+      }
+
+      requestAnimationFrame(renderLaminarCanvas);
+
+      // -------------------------------------------------------------------
+      // 4. SILHOUETTE 3D TILT PARALLAX & INTERACTIVE HOTSPOT CLUES
+      // -------------------------------------------------------------------
+      const CLUE_DATA = [
+        {
+          badge: '01 • Zero-Mask Freedom',
+          title: 'Zero-Mask Freedom',
+          desc: 'Breathe naturally with nothing covering your face, nose, or smile.'
+        },
+        {
+          badge: '02 • Whisper-Quiet Veil',
+          title: 'Whisper-Quiet Veil',
+          desc: 'Precision acoustic diffusion delivers crisp, purified air in near silence.'
+        },
+        {
+          badge: '03 • Invisible Architecture',
+          title: 'Invisible Architecture',
+          desc: 'Sculpted like modern audio gear. Conceals effortlessly beneath everyday clothing.'
+        }
+      ];
+
+      const hotspotNodes = document.querySelectorAll('[data-hotspot]');
+      const clueCards = document.querySelectorAll('[data-clue-card]');
+      const stageClueBadge = document.getElementById('stageClueBadge');
+      const stageClueText = document.getElementById('stageClueText');
+
+      function activateHotspot(index) {
+        const clue = CLUE_DATA[index];
+        if (!clue) return;
+
+        stageClueBadge.textContent = clue.badge;
+        stageClueText.textContent = clue.desc;
+
+        hotspotNodes.forEach(function (node, i) {
+          const core = node.querySelector('.hotspot-core');
+          if (i === index) {
+            core.className = 'hotspot-core relative flex items-center justify-center w-6 h-6 rounded-full bg-teal-400 text-slate-950 text-[11px] font-mono font-bold shadow-[0_0_20px_rgba(45,212,191,0.9)] ring-2 ring-white/80 scale-110 transition-all';
+          } else {
+            core.className = 'hotspot-core relative flex items-center justify-center w-6 h-6 rounded-full bg-slate-900/90 text-teal-300 border border-teal-400/60 text-[11px] font-mono font-bold shadow-[0_0_15px_rgba(45,212,191,0.45)] transition-all';
+          }
+        });
+
+        clueCards.forEach(function (card, i) {
+          const dot = card.querySelector('.clue-indicator');
+          if (i === index) {
+            card.className = 'clue-card text-left p-5 sm:p-6 rounded-3xl transition-all duration-300 cursor-pointer border bg-white dark:bg-[#0D1420] border-teal-500/60 dark:border-teal-400/50 shadow-lg shadow-teal-500/10';
+            if (dot) dot.className = 'clue-indicator w-2 h-2 rounded-full bg-teal-400';
+          } else {
+            card.className = 'clue-card text-left p-5 sm:p-6 rounded-3xl transition-all duration-300 cursor-pointer border bg-white/70 dark:bg-[#0B1018]/75 border-slate-200/90 dark:border-white/[0.08] hover:border-teal-500/40';
+            if (dot) dot.className = 'clue-indicator w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700';
+          }
+        });
+      }
+
+      hotspotNodes.forEach(function (node) {
+        const idx = parseInt(node.getAttribute('data-hotspot'), 10);
+        node.addEventListener('mouseenter', function () { activateHotspot(idx); });
+        node.addEventListener('click', function () { activateHotspot(idx); });
+      });
+
+      clueCards.forEach(function (card) {
+        const idx = parseInt(card.getAttribute('data-clue-card'), 10);
+        card.addEventListener('mouseenter', function () { activateHotspot(idx); });
+        card.addEventListener('click', function () { activateHotspot(idx); });
+      });
+
+      // Subtle 3D Tilt Parallax on the Dark-Studio Stage
+      const silhouetteStage = document.getElementById('silhouetteStage');
+      const silhouetteTiltCard = document.getElementById('silhouetteTiltCard');
+      const silhouetteDynamicGlow = document.getElementById('silhouetteDynamicGlow');
+
+      silhouetteStage.addEventListener('mousemove', function (e) {
+        const rect = silhouetteStage.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width;
+        const relY = (e.clientY - rect.top) / rect.height;
+        const rotY = (relX - 0.5) * 10;
+        const rotX = (0.5 - relY) * 8;
+        silhouetteTiltCard.style.transform = 'rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+        silhouetteDynamicGlow.style.background =
+          'radial-gradient(380px circle at ' + (relX * 100).toFixed(1) + '% ' + (relY * 100).toFixed(1) + '%, rgba(45, 212, 191, 0.22), transparent 70%)';
+      });
+
+      silhouetteStage.addEventListener('mouseleave', function () {
+        silhouetteTiltCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        silhouetteDynamicGlow.style.background =
+          'radial-gradient(380px circle at 50% 38%, rgba(45, 212, 191, 0.16), transparent 70%)';
+      });
+
+      // -------------------------------------------------------------------
+      // 5. ANIMATED AQI PURITY METER (165 -> 002 Pure)
+      // -------------------------------------------------------------------
+      const aqiNumberDisplay = document.getElementById('aqiNumberDisplay');
+      const aqiStatusPill = document.getElementById('aqiStatusPill');
+      const aqiMeterBar = document.getElementById('aqiMeterBar');
+      const replayAqiBtn = document.getElementById('replayAqiBtn');
+      const aqiBentoCard = document.getElementById('aqiBentoCard');
+      let aqiAnimId = null;
+
+      function runAqiSweep() {
+        if (aqiAnimId) cancelAnimationFrame(aqiAnimId);
+        const startVal = 165;
+        const endVal = 2;
+        const duration = 2200;
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / duration);
+          // Smooth cubic ease-out
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(startVal - (startVal - endVal) * eased);
+
+          aqiNumberDisplay.textContent = String(current).padStart(3, '0');
+          const widthPct = Math.max(6, Math.round((current / 190) * 100));
+          aqiMeterBar.style.width = widthPct + '%';
+
+          if (current > 100) {
+            aqiStatusPill.textContent = 'Smoke Plume';
+            aqiStatusPill.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30';
+            aqiNumberDisplay.className = 'font-mono font-bold text-4xl sm:text-5xl tracking-tight text-amber-300';
+          } else if (current > 25) {
+            aqiStatusPill.textContent = 'Purifying...';
+            aqiStatusPill.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-sky-500/20 text-sky-300 border border-sky-400/30';
+            aqiNumberDisplay.className = 'font-mono font-bold text-4xl sm:text-5xl tracking-tight text-sky-300';
+          } else {
+            aqiStatusPill.textContent = '002 Pure';
+            aqiStatusPill.className = 'px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-teal-500/20 text-teal-300 border border-teal-400/35';
+            aqiNumberDisplay.className = 'font-mono font-bold text-4xl sm:text-5xl tracking-tight text-teal-300';
+          }
+
+          if (progress < 1) {
+            aqiAnimId = requestAnimationFrame(step);
+          }
+        }
+
+        aqiAnimId = requestAnimationFrame(step);
+      }
+
+      replayAqiBtn.addEventListener('click', runAqiSweep);
+
+      // -------------------------------------------------------------------
+      // 6. SCROLL REVEAL & AQI VIEWPORT TRIGGER
+      // -------------------------------------------------------------------
+      let aqiTriggeredOnce = false;
+      const revealEls = document.querySelectorAll('.reveal-on-scroll');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              if (entry.target === aqiBentoCard && !aqiTriggeredOnce) {
+                aqiTriggeredOnce = true;
+                setTimeout(runAqiSweep, 250);
+              }
+            }
+          });
+        }, { threshold: 0.16 });
+
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+        runAqiSweep();
+      }
+
+      // -------------------------------------------------------------------
+      // 7. DUAL WAITLIST VALIDATION, SPOT COUNTER & INVITE LINK COPY
+      // -------------------------------------------------------------------
+      let currentSpotCounter = 428;
+      let inviteRefCode = 'INSIDER-0428';
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+      }
+
+      function completeWaitlistSignup(email) {
+        currentSpotCounter += 1;
+        const formattedSpot = '#' + String(currentSpotCounter).padStart(4, '0');
+        inviteRefCode = 'INSIDER-' + String(currentSpotCounter).padStart(4, '0');
+
+        document.querySelectorAll('.insider-spot-number').forEach(function (el) {
+          el.textContent = formattedSpot;
+        });
+        document.querySelectorAll('.confirmed-email-text').forEach(function (el) {
+          el.textContent = email.trim();
+        });
+
+        document.getElementById('heroWaitlistForm').classList.add('hidden');
+        document.getElementById('heroEmailError').classList.add('hidden');
+        document.getElementById('heroWaitlistSuccess').classList.remove('hidden');
+
+        document.getElementById('footerWaitlistForm').classList.add('hidden');
+        document.getElementById('footerEmailError').classList.add('hidden');
+        document.getElementById('footerWaitlistSuccess').classList.remove('hidden');
+
+        showToast('Spot ' + formattedSpot + ' reserved! Welcome to the Founding Insider list.');
+      }
+
+      document.getElementById('heroWaitlistForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const input = document.getElementById('heroEmailInput');
+        const errorEl = document.getElementById('heroEmailError');
+        if (!isValidEmail(input.value)) {
+          errorEl.classList.remove('hidden');
+          input.focus();
+          return;
+        }
+        completeWaitlistSignup(input.value);
+      });
+
+      document.getElementById('footerWaitlistForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const input = document.getElementById('footerEmailInput');
+        const errorEl = document.getElementById('footerEmailError');
+        if (!isValidEmail(input.value)) {
+          errorEl.classList.remove('hidden');
+          input.focus();
+          return;
+        }
+        completeWaitlistSignup(input.value);
+      });
+
+      document.querySelectorAll('[data-copy-invite]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const shareUrl = window.location.href.split('#')[0].split('?')[0] + '?vip=' + inviteRefCode;
+          const ok = copyTextSafe(shareUrl);
+          showToast(ok ? 'Priority invite link copied to clipboard.' : 'Invite code ready: ' + inviteRefCode);
+        });
+      });
+
+      // -------------------------------------------------------------------
+      // 8. LIVE LAUNCH COUNTDOWN TO MAY 1, 2027 ("Spring 2027 Global Unveil")
+      // -------------------------------------------------------------------
+      const unveilTargetMs = new Date('2027-05-01T09:00:00-07:00').getTime();
+      const cdDays = document.getElementById('cdDays');
+      const cdHours = document.getElementById('cdHours');
+      const cdMinutes = document.getElementById('cdMinutes');
+      const cdSeconds = document.getElementById('cdSeconds');
+
+      function updateCountdown() {
+        const nowMs = Date.now();
+        const diff = Math.max(0, unveilTargetMs - nowMs);
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        cdDays.textContent = String(days).padStart(2, '0');
+        cdHours.textContent = String(hours).padStart(2, '0');
+        cdMinutes.textContent = String(minutes).padStart(2, '0');
+        cdSeconds.textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    };
+  </script>
+</body>
+</html>
